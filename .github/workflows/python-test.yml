@@ -17,11 +17,16 @@ jobs:
       uses: SpicyPizza/create-envfile@v1
       with:
         REDIS_HOST: '172.17.0.5'
-        REDIS_PORT: 6379
-        RABBITMQ_HOST: '172.17.0.4'
-        RABBITMQ_PORT: 5672
-        RABBITMQ_USER: 'guest'
-        RABBITMQ_PASSWORD: 'guest'
+        REDIS_PORT: 6379 ,
+        RABBITMQ_HOST: '172.17.0.4',
+        RABBITMQ_PORT: 5672 ,
+        RABBITMQ_USER: 'guest',
+        RABBITMQ_PASSWORD: 'guest' ,
+        OUTER_RABBITMQ_HOST: '172.17.0.4' ,
+        OUTER_RABBITMQ_PORT: 5672 ,
+        OUTER_RABBITMQ_USER: 'guest' ,
+        OUTER_RABBITMQ_PASSWORD: 'guest' ,
+        EMAILS: "[recp1@org1.com](mailto:recp1@org1.com),recp2@org1.com" ,
         file_name: .env
         
     - name: 📂 Checkout
