@@ -16,6 +16,8 @@ jobs:
     - name: ⏬ Install dependencies
       run: |
         pip install pytest
+        pip install .[dev]
+        pip install -e.
 
   
         
