@@ -11,6 +11,7 @@ from ALL_flight_handling import (
 
 class TestUpdateFlightMessageToError(unittest.TestCase):
     
+    
     @patch("utils.redis_actions.RedisActions.get_names_failed_children")
     @patch("utils.redis_actions.RedisActions.update_count_sub_flight")
     def test_ALL_flight_handling_success(self, mock_update_count_sub_flight, mock_get_names_failed_children):
