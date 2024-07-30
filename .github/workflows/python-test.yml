@@ -8,7 +8,9 @@ jobs:
     defaults:
       run:
         working-directory: ./ALL_flight_handling
-
+env:
+   REDIS_HOST='172.17.0.5'
+   REDIS_PORT=6379
 
     steps:
     - name: 📂 Checkout
@@ -23,7 +25,7 @@ jobs:
         pip install -e .
         pip install azure_operations-0.0.2-py3-none-any.whl
         pip install inf_rabbit_utils-0.1.2-py3-none-any.whl
-        
+
         
     - name: ✅ Run tests
       run: |
