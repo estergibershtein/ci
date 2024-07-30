@@ -6,6 +6,7 @@ from utils.redis_actions import RedisActions
 
 
 class TestUpdateCountSubFlight(unittest.TestCase):
+    
     def test_update_count_sub_flight(self):
         redis = RedisActions()
         flight_name = "Flight123"
