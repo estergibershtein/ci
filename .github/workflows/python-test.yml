@@ -18,6 +18,10 @@ jobs:
       with:
         REDIS_HOST: '172.17.0.5'
         REDIS_PORT: 6379
+        RABBITMQ_HOST: '172.17.0.4'
+        RABBITMQ_PORT: 5672
+        RABBITMQ_USER: 'guest'
+        RABBITMQ_PASSWORD: 'guest'
         file_name: .env
         
     - name: 📂 Checkout
