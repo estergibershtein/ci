@@ -11,10 +11,10 @@ from ALL_flight_handling import (
 
 class TestUpdateFlightMessageToError(unittest.TestCase):
     
-    
+    @patch("utils.rabbitmq_actions.RabbitmqActions.publish")
     @patch("utils.redis_actions.RedisActions.get_names_failed_children")
     @patch("utils.redis_actions.RedisActions.update_count_sub_flight")
-    def test_ALL_flight_handling_success(self, mock_update_count_sub_flight, mock_get_names_failed_children):
+    def test_ALL_flight_handling_success(self, mock_RabbitmqActions_publish, mock_update_count_sub_flight, mock_get_names_failed_children):
         flight_message = {"payload": {"folder": "test_folder"}, "flightData": {"flightPath": "test_path"}}
         mock_get_names_failed_children.return_value = []
         mock_update_count_sub_flight.return_value = 0
