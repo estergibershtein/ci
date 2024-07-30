@@ -2,15 +2,17 @@ name: 🧪 Test Skyline-PipeLine
 on:
   push:
 
+
+env:
+   REDIS_HOST='172.17.0.5'
+   REDIS_PORT=6379
+
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./ALL_flight_handling
-env:
-   REDIS_HOST='172.17.0.5'
-   REDIS_PORT=6379
 
     steps:
     - name: 📂 Checkout
