@@ -5,6 +5,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ALL_flight_handling
+
 
     steps:
     - name: 📂 Checkout
@@ -16,8 +20,7 @@ jobs:
     - name: ⏬ Install dependencies
       run: |
         pip install pytest
-        pip install .[dev]
-        pip install -e.
+        pip install -e .
 
   
         
