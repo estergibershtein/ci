@@ -15,6 +15,7 @@ jobs:
 
     - name: ⏬ Install dependencies
       run: |
+        pip install .
         pip install pytest
   
         
