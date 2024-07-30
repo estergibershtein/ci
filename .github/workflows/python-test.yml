@@ -4,14 +4,7 @@ on:
 
 
 jobs:
-  create-envfile:
-  steps:
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        REDIS_HOST: "172.17.0.5"
-        REDIS_PORT: 6379
-        file_name: .env
+  
   build:
     runs-on: ubuntu-latest
     defaults:
@@ -19,6 +12,13 @@ jobs:
         working-directory: ./ALL_flight_handling
 
     steps:
+
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        REDIS_HOST: "172.17.0.5"
+        REDIS_PORT: 6379
+        file_name: .env
     - name: 📂 Checkout
       uses: actions/checkout@v3
     
