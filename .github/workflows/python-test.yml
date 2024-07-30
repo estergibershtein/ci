@@ -2,9 +2,6 @@ name: 🧪 Test Skyline-PipeLine
 on:
   push:
 
-env:
-   
-
 jobs:
   create-envfile:
   steps:
