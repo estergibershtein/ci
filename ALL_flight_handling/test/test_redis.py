@@ -28,13 +28,13 @@ class TestUpdateCountSubFlight(unittest.TestCase):
         self.assertEqual(flight_exists, 0)
         assert not flight_exists, f"Flight data {flight_name} still exists in Redis"
 
-    # @patch("utils.redis_actions.RedisActions.get_json_data")
-    # def test_get_names_failed_children(self, mock_get_json_data):
-    #     expected_result = ["Child1", "Child2"]
-    #     mock_get_json_data.return_value = {"FailuresChildren": expected_result}
-    #     test_instance = RedisActions()
-    #     result = test_instance.get_names_failed_children("test_flight_name")
-    #     self.assertEqual(result, expected_result)
+    @patch("utils.redis_actions.RedisActions.get_json_data")
+    def test_get_names_failed_children(self, mock_get_json_data):
+        expected_result = ["Child1", "Child2"]
+        mock_get_json_data.return_value = {"FailuresChildren": expected_result}
+        test_instance = RedisActions()
+        result = test_instance.get_names_failed_children("test_flight_name")
+        self.assertEqual(result, expected_result)
 
     def test_get_json_data_success(self):
         redis = RedisActions()
