@@ -17,6 +17,8 @@ jobs:
       run: |
         pip install pytest
         pip install .[dev]
+        pip install -e.
+
   
         
     - name: ✅ Run tests
