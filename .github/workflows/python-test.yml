@@ -17,7 +17,7 @@ jobs:
       uses: SpicyPizza/create-envfile@v1
       with:
         REDIS_HOST: '172.17.0.5'
-        REDIS_PORT: "6379"
+        REDIS_PORT: 6379
         file_name: .env
         
     - name: 📂 Checkout
