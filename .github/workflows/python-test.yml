@@ -23,8 +23,8 @@ jobs:
       run: |
         pip install pytest
         pip install -e .
-        pip install azure_operations-0.0.2-py3-none-any.whl
-        pip install inf_rabbit_utils-0.1.2-py3-none-any.whl
+        pip install git+https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/Green2Moon/SkylineAutomation.git#subdirectory=${azure_operations-0.0.2-py3-none-any.whl}        
+        pip install git+https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/Green2Moon/SkylineAutomation.git#subdirectory=${inf_rabbit_utils-0.1.2-py3-none-any.whl}        
 
         
     - name: ✅ Run tests
