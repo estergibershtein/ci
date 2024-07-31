@@ -6,6 +6,13 @@ from utils.redis_actions import RedisActions
 
 
 class TestUpdateCountSubFlight(unittest.TestCase):
+    
+    @patch('redis.Redis')
+    def setUp(self, mock_redis):
+        self.redis_actions = RedisActions()
+        self.mock_redis = mock_redis
+    
+    
     def test_update_count_sub_flight(self):
         redis = RedisActions()
         flight_name = "Flight123"
