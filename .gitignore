@@ -13,8 +13,6 @@
 *.log
 log/
 
-
-
 # Distribution / Cache
 .cache/
 .history/

@@ -1,5 +1,4 @@
 import logging
-
 from inf_rabbit_utils.producer import Producer
 from inf_rabbit_utils.consumer import Consumer
 

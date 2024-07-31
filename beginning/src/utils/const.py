@@ -1,3 +1,6 @@
+from pydantic import BaseModel
+from typing import Optional
+from enum import Enum
 import os
 from dotenv import load_dotenv
 
@@ -5,10 +8,10 @@ load_dotenv()
 
 
 class QueueNames:
-    END_PROCESS_QUEUE = "end_process_queue_name"
+    INFINITY_IN_QUEUE = "infinity"
+    PROCESS_QUEUE = "process_queue_name"
     ERROR_QUEUE = "inner_error_queue_name"
     COLONY_QUEUE = "colony_queue_name"
-    SEND_TO_SKYLINE_QUEUE = "send_skyline_queue_name"
 
 
 class RabbitMQConfig:
@@ -32,6 +35,22 @@ class AzureConfig:
 class RedisConfig:
     HOST = os.getenv("REDIS_HOST")
     PORT = os.getenv("REDIS_PORT")
+
+
+class FlightType(Enum):
+    NAVAD: str = "NAVAD"
+    TELEM: str = "TELEM"
+
+
+class FlightFormat(Enum):
+    MERGE: str = "MERGE"
+    ONE: str = "ONE"
+    ALL: str = "ALL"
+
+
+class DataFlight(BaseModel):
+    flight_type: str
+    flight_format: Optional[str]
 
 
 class ColonyConfig:

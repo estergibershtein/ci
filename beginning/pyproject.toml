@@ -3,9 +3,9 @@ requires = ["setuptools>=42"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "end-edit-service"
+name = "beginning-service"
 version = "1.0.0"
-description = "end edit the flight"
+description = "Edits the flight message at the beginning of the route track"
 readme = { file = "README.md", content-type = "markdown" }
 requires-python = ">=3.8"
 license = { file = "LICENSE.md" }

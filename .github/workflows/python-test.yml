@@ -2,14 +2,13 @@ name: 🧪 Test Skyline-PipeLine
 on:
   push:
 
-
 jobs:
   
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./ALL_flight_handling
+        working-directory: ./beginning
 
     steps:
 
@@ -27,3 +26,4 @@ jobs:
     - name: ✅ Run tests
       run: |
         pytest 
+        
