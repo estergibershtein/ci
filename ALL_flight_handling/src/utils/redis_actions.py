@@ -13,7 +13,6 @@ class RedisActions:
 
             self.redis_config = RedisConfig()
             self.connect_redis = redis.Redis(host=self.redis_config.HOST, port=self.redis_config.PORT)
-            logger.info(self.connect_redis ,"Connection to redis successfully completed.")
             # TODO  username="default",  password="secret"
             logger.info("Connection to redis successfully completed.")
         except Exception as error:
