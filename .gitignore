@@ -2,7 +2,7 @@
 
 
 # dotenv environment variable files
-# .env
+.env
 .env.*
 !.env.sample
 !.env.*.sample
