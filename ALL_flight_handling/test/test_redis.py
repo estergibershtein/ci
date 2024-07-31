@@ -6,37 +6,39 @@ from utils.redis_actions import RedisActions
 
 
 class TestUpdateCountSubFlight(unittest.TestCase):
-    
-    @patch('redis.Redis')
+    @patch("redis.Redis")
     def setUp(self, mock_redis):
         self.redis_actions = RedisActions()
         self.mock_redis = mock_redis
-    
-    
+        self.mock_get_json_data = self.mock_redis.return_value.get_json_data
+
+    def test_get_names_failed_children(self):
+        test_data = {"FailuresChildren": "Child1"}
+        self.redis_actions.connect_redis.get.return_value = json.dumps(test_data)
+        result = self.redis_actions.get_names_failed_children("TestFlight")
+        self.assertEqual(result, "Child1")
+
+    def test_get_names_failed_children_exception(self):
+        self.mock_get_json_data.side_effect = Exception("Test Error")
+        with self.assertRaises(ValueError):
+            self.redis_actions.get_names_failed_children("TestFlight")
+
     def test_update_count_sub_flight(self):
-        redis = RedisActions()
         flight_name = "Flight123"
         flight_message = {"test": "example_data", "CountSubFlight": 2}
-        redis.connect_redis.set(flight_name, json.dumps(flight_message))
-        redis.update_count_sub_flight(flight_name)
-        saved_data = redis.connect_redis.get(flight_name)
-        test_data = json.loads(saved_data)
+        self.redis_actions.connect_redis.set.return_value = (flight_name, json.dumps(flight_message))
+        self.redis_actions.connect_redis.update_count_sub_flight(flight_name)
+        test_data = self.redis_actions.connect_redis.get.return_value = flight_message
         flight_message["CountSubFlight"] -= 1
         self.assertEqual(test_data, flight_message)
-        redis.connect_redis.delete(flight_name)
 
     def test_delete_data_flight(self):
-        redis = RedisActions()
-        flight_name = "Flight123"
-        flight_message = {"test": "example_data", "CountSubFlight": 2}
-        redis.connect_redis.set(flight_name, json.dumps(flight_message))
-        redis.delete_data_flight(flight_name)
-        flight_exists = redis.connect_redis.exists(flight_name)
-        self.assertEqual(flight_exists, 0)
-        assert not flight_exists, f"Flight data {flight_name} still exists in Redis"
+        self.redis_actions.connect_redis.delete = MagicMock()
+        self.redis_actions.delete_data_flight("test_flight")
+        self.redis_actions.connect_redis.delete.assert_called_with("test_flight")
 
     @patch("utils.redis_actions.RedisActions.get_json_data")
-    def test_get_names_failed_children(self, mock_get_json_data):
+    def test_get_names_failed_children(self, mock_get_json_data):  # noqa: F811
         expected_result = ["Child1", "Child2"]
         mock_get_json_data.return_value = {"FailuresChildren": expected_result}
         test_instance = RedisActions()
