@@ -1,0 +1,5 @@
+redis==5.0.4 
+python-dotenv==1.0.1
+./custom_packages/inf_rabbit_utils-0.1.2-py3-none-any.whl
+./custom_packages/azure_operations-0.0.2-py3-none-any.whl
+-e .
