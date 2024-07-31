@@ -10,7 +10,6 @@ logger = create_logger(__name__)
 class RedisActions:
     def __init__(self) -> None:
         try:
-
             self.redis_config = RedisConfig()
             self.connect_redis = redis.Redis(host=self.redis_config.HOST, port=self.redis_config.PORT)
             # TODO  username="default",  password="secret"
