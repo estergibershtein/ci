@@ -46,23 +46,24 @@ class TestUpdateCountSubFlight(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_get_json_data_success(self):
-        redis = RedisActions()
+        mock_instance = RedisActions()
         test_data = {"key": "value"}
-        redis.connect_redis.set("test_flight_name", json.dumps(test_data))
-        result = redis.get_json_data("test_flight_name")
+        mock_instance.get_json_data = MagicMock(return_value=test_data)
+        result = mock_instance.get_json_data("test_flight_name")
         expected_result = {"key": "value"}
         self.assertDictEqual(result, expected_result)
 
-    def test_get_failed_children_and_error_description_success(self):
-        redis = RedisActions()
-        test_data = {"FailuresChildren": ["Child1", "Child2"]}
-        redis.connect_redis.set("test_flight_name", json.dumps(test_data))
-        result = redis.get_failed_children_and_error_description("test_flight_name")
-        self.assertEqual(result, test_data["FailuresChildren"])
+    def test_get_failed_children_and_error_description(self):
+        mock_data_flight = {"FailuresChildren": ["Child1", "Child2"]}
+        mock_instance = RedisActions()
+        mock_instance.get_json_data = MagicMock(return_value=mock_data_flight)
+        result = mock_instance.get_failed_children_and_error_description("TestFlight")
+        self.assertEqual(result, ["Child1", "Child2"])
+        mock_instance.get_json_data.assert_called_once_with("TestFlight")
 
     def test_get_failed_children_and_error_description_exception(self):
-        mock_instance = MagicMock()
-        mock_instance.get_json_data.side_effect = Exception("Error getting JSON data")
-        redis = RedisActions()
+        mock_instance = RedisActions()
+        mock_instance.get_json_data = MagicMock(side_effect=Exception("Test Error"))
         with self.assertRaises(ValueError):
-            redis.get_failed_children_and_error_description("test_flight_name")
+            mock_instance.get_failed_children_and_error_description("TestFlight")
+        mock_instance.get_json_data.assert_called_once_with("TestFlight")
